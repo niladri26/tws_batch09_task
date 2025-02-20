@@ -1,0 +1,65 @@
+install node, npm, vite, docker.io
+set up docker ps
+create directory .. github_repo
+pull git repo from github
+cd online_shop
+we need to run the app on port no. 3000... so edit in vite.config.js file as below...
+  ------------------------
+import {defineConfig} from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+    plugins: [react()],
+    base: './',
+    css: {
+      devSourcemap: false
+    },
+    server: {
+        port: 3000,
+        host: true
+    }
+});
+
+-----------------
+docker images, docker ps
+ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ vim Dockerfile
+----------------------------------
+FROM node:18-slim
+WORKDIR /app
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD ["npm","run","dev"]
+----------------------------------
+we have written docker file..
+now we will build docker image and then run the image to create docker container
+ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ docker build -t online-shop .
+ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ docker run -d -p 3000:3000 online-shop:latest
+
+to delete image, we need to stop and remove the container first and then remove the image
+docker ps -a
+docker stop [id] && docker rm [id]
+to delete image.... docker rmi [image id]
+docker images
+docker ps
+
+ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ docker build -t online-shop .
+ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ docker run -d -p 3000:3000 online-shop:latest
+run on browser
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
