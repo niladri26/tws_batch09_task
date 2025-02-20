@@ -24,14 +24,14 @@ export default defineConfig({
 -----------------
 docker images, docker ps
 ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ vim Dockerfile
-----------------------------------
+---------------------Dockerfile-------------
 FROM node:18-slim
 WORKDIR /app
 COPY . .
 RUN npm install
 EXPOSE 3000
 CMD ["npm","run","dev"]
-----------------------------------
+--------------------------------------------
 we have written docker file..
 now we will build docker image and then run the image to create docker container
 ubuntu@ip-172-31-22-63:~/github_repos/online_shop$ docker build -t online-shop .
